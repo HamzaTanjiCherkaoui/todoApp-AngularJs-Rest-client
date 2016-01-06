@@ -1,0 +1,48 @@
+<h2 class=" text-center ">Todos</h2>
+<table class="table ">
+	<tr class="table-header">
+		<td><input type="text" ng-model="todo.task" class="form-control" placeholder="add a task here ..."></td>
+		<td><a href="" class="btn btn-info" ng-click="addTodo()">Add</a></td>
+		<!-- <td><input type="checkbox" ng-model="done">  done/not done</td> -->
+	</tr>
+	<tr ng-repeat="todo in todos  | filter:{state:done}" ng-class="{'done': todo.state}">
+    <td>
+    <span ng-hide="!todo.state" style="color:green;font-weight:bold">Done</span>
+    	 {{todo.task}}
+    </td>
+    <td>
+      <a class="btn btn-info" ng-click="showEditTodo(todo)">Edit</a>
+      <a class="btn btn-primary"  ng-click="deleteTodo(todo)">Delete</a>
+    </td>
+    
+  </tr>
+	
+</table>
+
+
+<div class="modal fade bs-example-modal-sm" id="editModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Edit Todo : </h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="todoTask" class="control-label">Task:</label>
+            <input type="text" class="form-control" name="todoTask" ng-model="currentTodo.task" >
+          </div>
+          <div class="form-group">
+            <label for="todoState" class="control-label ">state(done/not done):</label>
+            <input type="checkbox"  name="todoState" ng-model="currentTodo.state" >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" ng-click="EditTodo()">Confirm Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
